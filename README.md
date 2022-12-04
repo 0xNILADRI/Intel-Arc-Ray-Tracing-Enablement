@@ -1,0 +1,1 @@
+# intel-arc-setup-linux
