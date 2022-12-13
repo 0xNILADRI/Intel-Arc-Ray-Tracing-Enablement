@@ -1,9 +1,9 @@
-# Ray Tracing on Intel Arc GPUs - Linux
+# Ray Tracing on Intel Arc GPUs - Ubuntu 22.04 LTS
 
 ![Intel Arc logo](https://www.intel.in/content/dam/www/central-libraries/us/en/images/2022-09/arc-a-series-desktops-rwd.png.rendition.intel.web.1920.1080.png)
 Image Source : [Intel](https://www.intel.in/content/www/in/en/products/details/discrete-gpus/arc.html)
 
-## Mesa 3D Graphics Library
+# Mesa 3D Graphics Library
 
 The Mesa project began as an open-source implementation of the OpenGL specification - a system for rendering interactive 3D graphics.
 
@@ -16,15 +16,22 @@ Mesa ties into several other open-source projects: the Direct Rendering Infrastr
 Source : [Mesa 3D](https://docs.mesa3d.org/index.html)
 
 
-## Table of Contents
+# Table of Contents
 - [Prerequisites](#prerequisites)
-- [Configuration](#configs)
+- [Configuration](#configuration)
 - [Downloads](#downloads)
+- [Installation](#installation)
+  - [Upgrade Kernel](#upgrade-kernel)
+  - [Update to linux-firmware.git](#update-to-linux-firmwaregit)
+  - [Installation of necessary components](#installation-of-necessary-components)
+  - [Build Mesa3D and install](#build-mesa3d-and-install)
+- [Testing Vulkan Ray Tracing Support](#testing-vulkan-ray-tracing-support)
+- [Known issues](#known-issues)
 - [Miscellaneous](#miscellaneous)
 
 # Prerequisites
 
-Check for Resizable BAR (ReBAR) support.
+* Check for Resizable BAR (ReBAR) support.
 ```bash
 # check for ReBAR support
 lspci -v |grep -A8 VGA
@@ -43,6 +50,30 @@ lspci -v |grep -A8 VGA
 # THIS should match the size of your GPU, if not enable ReBAR via BIOS.
 ```
 
+* Add GPU id to grub boot parameter since the kernel still considers Arc as experimental. Thus we have to add i915.force_probe = device_id in grub.
+```bash
+# edit grub 
+sudo nano /etc/default/grub
+
+# add the following (i915.force_probe=) with your own device id 
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.force_probe=56a0"
+
+# update grub
+sudo update-grub
+
+# reboot
+sudo reboot
+```
+
+* Install dependencies for building Mesa. We will be using default LLVM 13 shipped with Ubuntu 22.04.
+```bash
+sudo apt-get install build-essential git cmake
+sudo apt-get build-dep mesa
+
+# additional packages needs to installed
+sudo apt-get install libllvmspirvlib13 libllvmspirvlib-dev libclc-13 python3-ply python-is-python3
+```
+
 # Configuration
 
 | Specifications | Detail                                                  |
@@ -50,12 +81,12 @@ lspci -v |grep -A8 VGA
 | Operating System    | Ubuntu 22.04 LTS                            |
 | Kernel Version      | Linux Kernel 6.1-rc5                        |
 | CPU                 | Intel i7-1165G7 (8 cores)                   |
-| Integrated Graphics | Intel UHD Graphics 630                      |
+| Integrated Graphics | Intel® Iris® Xe Graphics                    |
 | Discrete Graphics   | Intel Arc A770 16GB                         |
 
 # Downloads
 
-1. Upgrade to Linux 6.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
+1. Linux 6.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). 
 
 ```bash
 sudo apt-get update && sudo apt-get full-upgrade -y # update the system
@@ -71,30 +102,16 @@ wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-headers
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-image-unsigned-6.1.0-060100rc5-generic_6.1.0-060100rc5.202211132230_amd64.deb
 
 wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-modules-6.1.0-060100rc5-generic_6.1.0-060100rc5.202211132230_amd64.deb
-
-# install
-sudo dpkg -i *.deb
-
-# reboot the system
-sudo reboot
-
-# check the kernel version
-uname -r 
 ```
 
-2. [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git) needed for Arc GPU support since the graphics micro-controller requires "GuC" firmware v70 or higher.
+2. [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git).
 
 ```bash
 cd ~/Downloads
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git firmware
-
-
-# copy all contents to firmware
-sudo cp -a firmware/. /lib/firmware/
-
 ```
 
-3. Intel [Graphics Compiler](https://github.com/intel/intel-graphics-compiler) and [Graphics Compute](https://github.com/intel/compute-runtime). For OpenCL and Level Zero support, the latest Intel Compute-Runtime on GitHub along with associated GitHub components like Level-Zero and the Intel Graphics Compiler (IGC).
+3. Intel [Graphics Compiler](https://github.com/intel/intel-graphics-compiler) and [Graphics Compute](https://github.com/intel/compute-runtime). 
 
 ```bash
 cd ~/Downloads 
@@ -110,10 +127,58 @@ wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/inte
 wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/intel-opencl-icd-dbgsym_22.43.24558_amd64.ddeb
 wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/intel-opencl-icd_22.43.24558_amd64.deb
 wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/libigdgmm12_22.2.0_amd64.deb
+```
+__`Alternative`__
+
+We can use the ubuntu's package manager and install the necessary dependancies. Scroll down to installation for details.
+
+<br>
+
+4. Mesa 23.0-devel, main branch. GitLab repository can be found [here](https://gitlab.freedesktop.org/mesa/mesa/).
+
+Clone the repository
+```bash
+sudo apt install git
+cd Downloads
+git clone https://gitlab.freedesktop.org/mesa/mesa.git mesa
+```
+
+# Installation
+
+## Upgrade Kernel
+Linux 6.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
+
+```bash
+cd ~/Downloads/kernel-6.1 
+
+# install
+sudo dpkg -i *.deb
+
+# reboot the system
+sudo reboot
+
+# check the kernel version
+uname -r 
+```
+
+## Update to linux-firmware.git
+[Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git) needed for Arc GPU support since the graphics micro-controller requires "GuC" firmware v70 or higher.
+
+```bash
+cd ~/Downloads/firmware
+
+# copy all contents to firmware
+sudo cp -a firmware/. /lib/firmware/
+```
+
+## Installation of necessary components
+Intel [Graphics Compiler](https://github.com/intel/intel-graphics-compiler) and [Graphics Compute](https://github.com/intel/compute-runtime). For OpenCL and Level Zero support, the latest Intel Compute-Runtime on GitHub along with associated GitHub components like Level-Zero and the Intel Graphics Compiler (IGC).
+
+```bash
+cd ~/Downloads/neo
 
 #install
 sudo dpkg -i *.deb
-
 ```
 __`Alternative`__
 
@@ -141,15 +206,64 @@ sudo apt-get install -y libigc-dev intel-igc-cm libigdfcl-dev libigfxcmrt-dev le
 sudo reboot
 ```
 
+## Build Mesa3D and install
+Build mesa from source with few parameters required for Intel Arc Ray Tracing to work.
+```bash
+cd mesa
+mkdir build && cd build
 
-4. Mesa 23.0-devel, main branch. GitLab repository can be found [here](https://gitlab.freedesktop.org/mesa/mesa/).
+# configure meson to build accordingly
+meson .. -Dintel-drivers=intel -Dintel-clc=enabled
+
+# install using ninja
+sudo ninja install
+```
+
+Since there are multiple mesa versions present in the system it will create redundancy and will error out during runtime. Thus a brute-force measure would be to rename the older Vulkan folder consisting of icd drivers.
+
+```bash
+cd /usr/share/
+sudo mv Vulkan Vulkan.old.bak
+```
+
+
+# Testing Vulkan Ray Tracing Support
+We will be using the official Khronos Vulkan samples provided by [Sacsha Willems](https://www.saschawillems.de/) in the following [repository](https://github.com/SaschaWillems/Vulkan) for our testing purpose.
+
+__About the repository__ 
+
+To help people get started with the Vulkan graphics api Sacsha released a repository of examples C++ along with the start of Vulkan. He started developing these before Vulkan was publicly released while being a member of the Vulkan advisory panel, and have since then added more and more examples, demonstrating many different aspects of the api.
+
+The list of examples (already more than 60) range from basic api usage to more complex setups, and also include examples for different rendering methods and effects (physical based rendering, screen space ambient occlusion, deferred rendering, etc.) and demonstrating use of several extensions.
+
+Source : [saschawillems.de](https://www.saschawillems.de/creations/vulkan-examples/)
 
 Clone the repository
 ```bash
-sudo apt install git
-cd Downloads
-git clone https://gitlab.freedesktop.org/mesa/mesa.git
+git clone --recursive https://github.com/SaschaWillems/Vulkan.git
+
+# download additional assets
+cd Vulkan
+python download_assets.py
 ```
+
+Build the demos
+```bash
+cd ~/Downloads/Vulkan
+mkdir build && cd build
+
+cmake ..
+cmake build .
+```
+
+Run a demo 
+```bash
+cd build
+./raytracingbasics
+```
+
+
+# Known issues
 
 
 
