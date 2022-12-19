@@ -256,15 +256,94 @@ cmake ..
 cmake build .
 ```
 
-Run a demo 
+How to run a demo 
 ```bash
 cd build
 ./raytracingbasics
 ```
 
+__Ray Tracing__
+
+Simple GPU ray tracer with shadows and reflections using a compute shader. No scene geometry is rendered in the graphics pass.
+
+![compute_ray_tracing](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/computeRayTracing.gif)
+
+
+__Mesh Shaders (VK_EXT_mesh_shader)__
+
+Basic sample demonstrating how to use the mesh shading pipeline as a replacement for the traditional vertex pipeline.
+
+Needs additional runtime parameters : ANV_EXPERIMENTAL_NV_MESH_SHADER=1
+
+![mesh_shaders](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/meshShader.gif)
+
+
+__Ray Query__
+
+Ray queries add acceleration structure intersection functionality to non ray tracing shader stages. This allows for combining ray tracing with rasterization. This example makes uses ray queries to add ray casted shadows to a rasterized sample in the fragment shader.
+
+![ray_query](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/rayQuery.gif)
+
+
+__Ray Traced Shadows__
+
+Adds ray traced shadows casting using the new ray tracing extensions to a more complex scene. Shows how to add multiple hit and miss shaders and how to modify existing shaders to add shadow calculations.
+
+![ray_traced_shadows](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/rayTracedShadows.gif)
+
+
+__Basic Ray Tracing__
+
+Basic example for doing hardware accelerated ray tracing using the VK_KHR_acceleration_structure and VK_KHR_ray_tracing_pipeline extensions. Shows how to setup acceleration structures, ray tracing pipelines and the shader binding table needed to do the actual ray tracing.
+
+![basic_ray_tracing](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/rayTracingBasic.gif)
+
+
+__Callable Ray Tracing Shaders__
+
+Callable shaders can be dynamically invoked from within other ray tracing shaders to execute different shaders based on dynamic conditions. The example ray traces multiple geometries, with each calling a different callable shader from the closest hit shader.
+
+![ray_tracing_shaders](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/rayTracingCallable.gif)
+
+
+__Ray Traced Reflections__
+
+Renders a complex scene with reflective surfaces using the new ray tracing extensions. Shows how to do recursion inside of the ray tracing shaders for implementing real time reflections.
+
+![ray_traced_shaders](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/rayTracingReflections.gif)
+
+
+
 
 # Known issues
 
+__Graphics Pipeline Library (VK_EXT_graphics_pipeline_library)__
+
+Uses the graphics pipeline library extensions to improve run-time pipeline creation. Instead of creating the whole pipeline at once, this sample pre builds shared pipeline parts like like vertex input state and fragment output state. These are then used to create full pipelines at runtime, reducing build times and possible hick-ups.
+
+`Reason : Not yet supported upstream, the MR adding support : https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/15637 `
+
+![graphics_pipeline_library](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/errors/graphicsPipeline.gif)
+
+
+__Texture Mapping & Texture Arrays__
+
+Loads a 2D texture from disk (including all mip levels), uses staging to upload it into video memory and samples from it using combined image samplers. 
+
+Loads a 2D texture array containing multiple 2D texture slices (each with its own mip chain) and renders multiple meshes each sampling from a different layer of the texture. 2D texture arrays don't do any interpolation between the slices.
+
+`Reason : There is no support for sparse binding the kernel driver.`
+
+![sparse_binding](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/errors/textureSparseResidency.gif)
+
+
+__Variable Rate Shading (VK_NV_shading_rate_image)__
+
+Uses a special image that contains variable shading rates to vary the number of fragment shader invocations across the framebuffer. This makes it possible to lower fragment shader invocations for less important/less noisy parts of the framebuffer.
+
+`Reason : The extension VK_KHR_shading_rate_image is not supported. Although a similar extension VK_KHR_fragment_shading_rate is supported on Intel Arc.`
+
+![variable_rate_shading](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/errors/variableRateShading.gif)
 
 
 # Miscellaneous
