@@ -165,7 +165,7 @@ uname -r
 [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git) needed for Arc GPU support since the graphics micro-controller requires "GuC" firmware v70 or higher.
 
 ```bash
-cd ~/Downloads/firmware
+cd ~/Downloads
 
 # copy all contents to firmware
 sudo cp -a firmware/. /lib/firmware/
@@ -213,7 +213,7 @@ cd mesa
 mkdir build && cd build
 
 # configure meson to build accordingly
-meson .. -Dintel-drivers=intel -Dintel-clc=enabled
+meson .. -Dvulkan-drivers=intel -Dintel-clc=enabled
 
 # install using ninja
 sudo ninja install
