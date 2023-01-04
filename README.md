@@ -118,15 +118,15 @@ cd ~/Downloads
 mkdir neo && cd neo
 
 # download 
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12260.1/intel-igc-core_1.0.12260.1_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12260.1/intel-igc-media_1.0.12260.1_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12260.1/intel-igc-opencl-devel_1.0.12260.1_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12260.1/intel-igc-opencl_1.0.12260.1_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/intel-level-zero-gpu-dbgsym_1.3.24558_amd64.ddeb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/intel-level-zero-gpu_1.3.24558_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/intel-opencl-icd-dbgsym_22.43.24558_amd64.ddeb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/intel-opencl-icd_22.43.24558_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24558/libigdgmm12_22.2.0_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-core_1.0.12504.5_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-media_1.0.12504.5_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-opencl-devel_1.0.12504.5_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-opencl_1.0.12504.5_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-level-zero-gpu-dbgsym_1.3.24595.30_amd64.ddeb
+wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-level-zero-gpu_1.3.24595.30_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-opencl-icd-dbgsym_22.43.24595.30_amd64.ddeb
+wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-opencl-icd_22.43.24595.30_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/libigdgmm12_22.3.0_amd64.deb
 ```
 __`Alternative`__
 
@@ -223,7 +223,7 @@ Since there are multiple mesa versions present in the system it will create redu
 
 ```bash
 cd /usr/share/
-sudo mv Vulkan Vulkan.old.bak
+sudo mv vulkan vulkan.old.bak
 ```
 
 
@@ -253,12 +253,12 @@ cd ~/Downloads/Vulkan
 mkdir build && cd build
 
 cmake ..
-cmake build .
+cmake --build .
 ```
 
 How to run a demo 
 ```bash
-cd build
+cd build/bin
 ./raytracingbasics
 ```
 
