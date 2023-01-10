@@ -50,21 +50,6 @@ lspci -v |grep -A8 VGA
 # THIS should match the size of your GPU, if not enable ReBAR via BIOS.
 ```
 
-* Add GPU id to grub boot parameter since the kernel still considers Arc as experimental. Thus we have to add i915.force_probe = device_id in grub.
-```bash
-# edit grub 
-sudo nano /etc/default/grub
-
-# add the following (i915.force_probe=) with your own device id 
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.force_probe=56a0"
-
-# update grub
-sudo update-grub
-
-# reboot
-sudo reboot
-```
-
 * Install dependencies for building Mesa. We will be using default LLVM 13 shipped with Ubuntu 22.04.
 ```bash
 sudo apt-get install build-essential git cmake
@@ -92,16 +77,16 @@ sudo apt-get install libllvmspirvlib13 libllvmspirvlib-dev libclc-13 python3-ply
 sudo apt-get update && sudo apt-get full-upgrade -y # update the system
 sudo apt install wget # if not present
 cd ~/Downloads 
-mkdir kernel-6.1 && cd kernel-6.1 # kernel directory
+mkdir kernel-6.2-rc3 && cd kernel-6.2-rc3 # kernel directory
 
 # downloading the kernel
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-headers-6.1.0-060100rc5-generic_6.1.0-060100rc5.202211132230_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-headers-6.2.0-060200rc3-generic_6.2.0-060200rc3.202301081352_amd64.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-headers-6.1.0-060100rc5_6.1.0-060100rc5.202211132230_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-headers-6.2.0-060200rc3_6.2.0-060200rc3.202301081352_all.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-image-unsigned-6.1.0-060100rc5-generic_6.1.0-060100rc5.202211132230_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-image-unsigned-6.2.0-060200rc3-generic_6.2.0-060200rc3.202301081352_amd64.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.1-rc5/amd64/linux-modules-6.1.0-060100rc5-generic_6.1.0-060100rc5.202211132230_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-modules-6.2.0-060200rc3-generic_6.2.0-060200rc3.202301081352_amd64.deb
 ```
 
 2. [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git).
