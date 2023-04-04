@@ -56,7 +56,7 @@ sudo apt-get install build-essential git cmake
 sudo apt-get build-dep mesa
 
 # additional packages needs to installed
-sudo apt-get install libllvmspirvlib13 libllvmspirvlib-dev libclc-13 python3-ply python-is-python3
+sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 python3-ply python-is-python3
 ```
 
 # Configuration
@@ -103,15 +103,15 @@ cd ~/Downloads
 mkdir neo && cd neo
 
 # download 
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-core_1.0.12504.5_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-media_1.0.12504.5_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-opencl-devel_1.0.12504.5_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.12504.5/intel-igc-opencl_1.0.12504.5_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-level-zero-gpu-dbgsym_1.3.24595.30_amd64.ddeb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-level-zero-gpu_1.3.24595.30_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-opencl-icd-dbgsym_22.43.24595.30_amd64.ddeb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/intel-opencl-icd_22.43.24595.30_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/22.43.24595.30/libigdgmm12_22.3.0_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-core_1.0.13230.7_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-opencl_1.0.13230.7_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-level-zero-gpu-dbgsym_1.3.25593.11_amd64.ddeb
+wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-level-zero-gpu_1.3.25593.11_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-opencl-icd-dbgsym_23.05.25593.11_amd64.ddeb
+wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-opencl-icd_23.05.25593.11_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/libigdgmm12_22.3.0_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-media_1.0.13230.7_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-opencl-devel_1.0.13230.7_amd64.deb
 ```
 __`Alternative`__
 
