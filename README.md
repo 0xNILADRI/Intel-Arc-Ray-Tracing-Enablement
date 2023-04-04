@@ -56,7 +56,7 @@ sudo apt-get install build-essential git cmake
 sudo apt-get build-dep mesa
 
 # additional packages needs to installed
-sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 python3-ply python-is-python3
+sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 libclang-dev python3-ply python-is-python3
 ```
 
 # Configuration
@@ -123,18 +123,17 @@ We can use the ubuntu's package manager and install the necessary dependancies. 
 
 Clone the repository
 ```bash
-sudo apt install git
-cd Downloads
+cd ~/Downloads
 git clone https://gitlab.freedesktop.org/mesa/mesa.git mesa
 ```
 
 # Installation
 
 ## Upgrade Kernel
-Linux 6.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
+Linux 6.2 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
 
 ```bash
-cd ~/Downloads/kernel-6.1 
+cd ~/Downloads/kernel-6.2-rc3 
 
 # install
 sudo dpkg -i *.deb
