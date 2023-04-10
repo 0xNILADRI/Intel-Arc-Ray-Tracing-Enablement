@@ -71,22 +71,22 @@ sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 libclang-de
 
 # Downloads
 
-1. Linux 6.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). 
+1. Linux 6.3 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). 
 
 ```bash
 sudo apt-get update && sudo apt-get full-upgrade -y # update the system
 sudo apt install wget # if not present
 cd ~/Downloads 
-mkdir kernel-6.2-rc3 && cd kernel-6.2-rc3 # kernel directory
+mkdir kernel-6.3-rc6 && cd kernel-6.3-rc6 # kernel directory
 
 # downloading the kernel
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-headers-6.2.0-060200rc3-generic_6.2.0-060200rc3.202301081352_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-headers-6.3.0-060300rc6daily20230410-generic_6.3.0-060300rc6daily20230410.202304092201_amd64.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-headers-6.2.0-060200rc3_6.2.0-060200rc3.202301081352_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-headers-6.3.0-060300rc6daily20230410_6.3.0-060300rc6daily20230410.202304092201_all.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-image-unsigned-6.2.0-060200rc3-generic_6.2.0-060200rc3.202301081352_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-image-unsigned-6.3.0-060300rc6daily20230410-generic_6.3.0-060300rc6daily20230410.202304092201_amd64.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.2-rc3/amd64/linux-modules-6.2.0-060200rc3-generic_6.2.0-060200rc3.202301081352_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-modules-6.3.0-060300rc6daily20230410-generic_6.3.0-060300rc6daily20230410.202304092201_amd64.deb
 ```
 
 2. [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git).
@@ -119,7 +119,7 @@ We can use the ubuntu's package manager and install the necessary dependancies. 
 
 <br>
 
-4. Mesa 23.0-devel, main branch. GitLab repository can be found [here](https://gitlab.freedesktop.org/mesa/mesa/).
+4. Mesa 23.1-devel, main branch. GitLab repository can be found [here](https://gitlab.freedesktop.org/mesa/mesa/).
 
 Clone the repository
 ```bash
@@ -130,10 +130,10 @@ git clone https://gitlab.freedesktop.org/mesa/mesa.git mesa
 # Installation
 
 ## Upgrade Kernel
-Linux 6.2 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
+Linux 6.3 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
 
 ```bash
-cd ~/Downloads/kernel-6.2-rc3 
+cd ~/Downloads/kernel-6.3-rc6 
 
 # install
 sudo dpkg -i *.deb
