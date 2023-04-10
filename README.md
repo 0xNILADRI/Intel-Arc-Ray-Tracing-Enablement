@@ -64,7 +64,7 @@ sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 libclang-de
 | Specifications | Detail                                                  |
 | ------------------- | ------------------------------------------- |
 | Operating System    | Ubuntu 22.04 LTS                            |
-| Kernel Version      | Linux Kernel 6.1-rc5                        |
+| Kernel Version      | Linux Kernel 6.3-rc6                        |
 | CPU                 | Intel i7-1165G7 (8 cores)                   |
 | Integrated Graphics | Intel® Iris® Xe Graphics                    |
 | Discrete Graphics   | Intel Arc A770 16GB                         |
