@@ -197,7 +197,7 @@ cd mesa
 mkdir build && cd build
 
 # configure meson to build accordingly
-meson .. -Dvulkan-drivers=intel -Dintel-clc=enabled
+meson .. -Dvulkan-drivers=intel -Dintel-clc=enabled  -Dglvnd=true
 
 # install using ninja
 sudo ninja install
