@@ -80,13 +80,13 @@ cd ~/Downloads
 mkdir kernel-6.5.1 && cd kernel-6.5.1 # kernel directory
 
 # downloading the kernel
-https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-headers-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-headers-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
 
-https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-headers-6.5.1-060501_6.5.1-060501.202309020842_all.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-headers-6.5.1-060501_6.5.1-060501.202309020842_all.deb
 
-https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-image-unsigned-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-image-unsigned-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
 
-https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-modules-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-modules-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
 ```
 
 2. [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git).
@@ -110,8 +110,8 @@ wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/i
 wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/intel-opencl-icd-dbgsym_23.22.26516.18_amd64.ddeb
 wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/intel-opencl-icd_23.22.26516.18_amd64.deb
 wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/libigdgmm12_22.3.0_amd64.deb
-https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-media_1.0.14062.11_amd64.deb
-https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-opencl-devel_1.0.14062.11_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-media_1.0.14062.11_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-opencl-devel_1.0.14062.11_amd64.deb
 ```
 __`Alternative`__
 
