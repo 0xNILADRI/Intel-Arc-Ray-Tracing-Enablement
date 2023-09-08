@@ -71,22 +71,22 @@ sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 libclang-de
 
 # Downloads
 
-1. Linux 6.3 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). 
+1. Linux 6.5.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). 
 
 ```bash
 sudo apt-get update && sudo apt-get full-upgrade -y # update the system
 sudo apt install wget # if not present
 cd ~/Downloads 
-mkdir kernel-6.3-rc6 && cd kernel-6.3-rc6 # kernel directory
+mkdir kernel-6.5.1 && cd kernel-6.5.1 # kernel directory
 
 # downloading the kernel
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-headers-6.3.0-060300rc6daily20230410-generic_6.3.0-060300rc6daily20230410.202304092201_amd64.deb
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-headers-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-headers-6.3.0-060300rc6daily20230410_6.3.0-060300rc6daily20230410.202304092201_all.deb
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-headers-6.5.1-060501_6.5.1-060501.202309020842_all.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-image-unsigned-6.3.0-060300rc6daily20230410-generic_6.3.0-060300rc6daily20230410.202304092201_amd64.deb
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-image-unsigned-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
 
-wget https://kernel.ubuntu.com/~kernel-ppa/mainline/daily/2023-04-10/amd64/linux-modules-6.3.0-060300rc6daily20230410-generic_6.3.0-060300rc6daily20230410.202304092201_amd64.deb
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v6.5.1/amd64/linux-modules-6.5.1-060501-generic_6.5.1-060501.202309020842_amd64.deb
 ```
 
 2. [Linux-firmware.git](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git).
@@ -103,15 +103,15 @@ cd ~/Downloads
 mkdir neo && cd neo
 
 # download 
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-core_1.0.13230.7_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-opencl_1.0.13230.7_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-level-zero-gpu-dbgsym_1.3.25593.11_amd64.ddeb
-wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-level-zero-gpu_1.3.25593.11_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-opencl-icd-dbgsym_23.05.25593.11_amd64.ddeb
-wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-opencl-icd_23.05.25593.11_amd64.deb
-wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/libigdgmm12_22.3.0_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-media_1.0.13230.7_amd64.deb
-wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-opencl-devel_1.0.13230.7_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-core_1.0.14062.11_amd64.deb
+wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-opencl_1.0.14062.11_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/intel-level-zero-gpu-dbgsym_1.3.26516.18_amd64.ddeb
+wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/intel-level-zero-gpu_1.3.26516.18_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/intel-opencl-icd-dbgsym_23.22.26516.18_amd64.ddeb
+wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/intel-opencl-icd_23.22.26516.18_amd64.deb
+wget https://github.com/intel/compute-runtime/releases/download/23.22.26516.18/libigdgmm12_22.3.0_amd64.deb
+https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-media_1.0.14062.11_amd64.deb
+https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.14062.11/intel-igc-opencl-devel_1.0.14062.11_amd64.deb
 ```
 __`Alternative`__
 
@@ -119,7 +119,7 @@ We can use the ubuntu's package manager and install the necessary dependancies. 
 
 <br>
 
-4. Mesa 23.1-devel, main branch. GitLab repository can be found [here](https://gitlab.freedesktop.org/mesa/mesa/).
+4. Mesa 23.3.0-devel, main branch. GitLab repository can be found [here](https://gitlab.freedesktop.org/mesa/mesa/).
 
 Clone the repository
 ```bash
@@ -130,10 +130,10 @@ git clone https://gitlab.freedesktop.org/mesa/mesa.git mesa
 # Installation
 
 ## Upgrade Kernel
-Linux 6.3 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
+Linux 6.5.1 Kernel from [Ubuntu archives](https://kernel.ubuntu.com/~kernel-ppa/mainline/). We will manually download the necessary files using wget and install them with dpkg but before that we should make sure that our system is updated.
 
 ```bash
-cd ~/Downloads/kernel-6.3-rc6 
+cd ~/Downloads/kernel-6.5.1
 
 # install
 sudo dpkg -i *.deb
