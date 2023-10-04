@@ -56,7 +56,7 @@ sudo apt-get install build-essential git cmake
 sudo apt-get build-dep mesa
 
 # additional packages needs to installed
-sudo apt-get install libllvmspirvlib15 libllvmspirvlib-dev libclc-15 libclang-dev python3-ply python-is-python3
+sudo apt-get install libllvmspirvlib15 libllvmspirvlib-15-dev libclc-15 libclang-15-dev python3-ply python-is-python3
 ```
 
 # Configuration
