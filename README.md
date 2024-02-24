@@ -301,15 +301,6 @@ Renders a complex scene with reflective surfaces using the new ray tracing exten
 
 # Known issues
 
-__Graphics Pipeline Library (VK_EXT_graphics_pipeline_library)__
-
-Uses the graphics pipeline library extensions to improve run-time pipeline creation. Instead of creating the whole pipeline at once, this sample pre builds shared pipeline parts like like vertex input state and fragment output state. These are then used to create full pipelines at runtime, reducing build times and possible hick-ups.
-
-`Reason : Not yet supported upstream, the MR adding support : https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/15637 `
-
-![graphics_pipeline_library](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/errors/graphicsPipeline.gif)
-
-
 __Texture Mapping & Texture Arrays__
 
 Loads a 2D texture from disk (including all mip levels), uses staging to upload it into video memory and samples from it using combined image samplers. 
