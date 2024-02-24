@@ -301,17 +301,6 @@ Renders a complex scene with reflective surfaces using the new ray tracing exten
 
 # Known issues
 
-__Texture Mapping & Texture Arrays__
-
-Loads a 2D texture from disk (including all mip levels), uses staging to upload it into video memory and samples from it using combined image samplers. 
-
-Loads a 2D texture array containing multiple 2D texture slices (each with its own mip chain) and renders multiple meshes each sampling from a different layer of the texture. 2D texture arrays don't do any interpolation between the slices.
-
-`Reason : There is no support for sparse binding the kernel driver.`
-
-![sparse_binding](https://github.com/afkniladri/Intel-Arc-Ray-Tracing-Enablement/blob/main/assets/demos/errors/textureSparseResidency.gif)
-
-
 __Variable Rate Shading (VK_NV_shading_rate_image)__
 
 Uses a special image that contains variable shading rates to vary the number of fragment shader invocations across the framebuffer. This makes it possible to lower fragment shader invocations for less important/less noisy parts of the framebuffer.
